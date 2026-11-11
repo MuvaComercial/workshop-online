@@ -102,6 +102,31 @@ p.lead2 { font-size: clamp(18px, 1.7vw, 24px); line-height: 1.5; font-weight: 30
 .rv.d1 { transition-delay: .08s } .rv.d2 { transition-delay: .16s } .rv.d3 { transition-delay: .24s } .rv.d4 { transition-delay: .32s }
 @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } .hero h1 .ln > span { animation: none; transform: none; } .marq .track { animation: none !important; } }
 
+/* depoimentos */
+.deps { padding: clamp(56px, 8vw, 112px) 0; background: var(--black); border-top: 1px solid var(--graphite); }
+.deps .head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px; margin-bottom: 36px; }
+.deps h2 { font-family: 'Jaapokki', sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(32px, 4.6vw, 72px); line-height: 1; margin: 10px 0 0; max-width: 18ch; }
+.deps .vids { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+@media (max-width: 860px) { .deps .vids { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
+.dv { margin: 0; background: var(--ink); border: 1px solid var(--graphite); }
+.dv .fr { position: relative; aspect-ratio: 4/5; background: #000; overflow: hidden; cursor: pointer; }
+.dv video { width: 100%; height: 100%; object-fit: cover; }
+.dv .pl { position: absolute; inset: 0; display: flex; align-items: flex-end; justify-content: flex-start; padding: 18px; background: linear-gradient(0deg, rgba(10,10,10,.85) 0%, rgba(10,10,10,0) 55%); border: 0; color: var(--paper); cursor: pointer; text-align: left; width: 100%; }
+.dv .pl .c { width: 64px; height: 64px; border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 0 8px rgba(232,52,28,.2); transition: transform .2s; }
+.dv .pl:hover .c { transform: translate(-50%, -50%) scale(1.08); }
+.dv .pl .c svg { width: 24px; height: 24px; margin-left: 4px; }
+.dv .pl q { font-size: 17px; line-height: 1.35; font-style: italic; quotes: '“' '”'; }
+.dv.on .pl { display: none; }
+.dv figcaption { padding: 16px 18px 18px; border-top: 2px solid var(--red); }
+.dv figcaption b { display: block; font-size: 19px; }
+.dv figcaption span { display: block; font: 400 12px/1.5 'Source Code Pro', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--fog); margin-top: 4px; }
+.deps .txts { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+@media (max-width: 860px) { .deps .txts { grid-template-columns: 1fr; } }
+.deps .tq { border: 1px solid var(--graphite); padding: 22px; }
+.deps .tq p { margin: 0 0 14px; font-size: 18px; font-style: italic; line-height: 1.45; }
+.deps .tq b { font-size: 16px; }
+.deps .tq span { font: 400 12px 'Source Code Pro', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--fog); margin-left: 8px; }
+
 /* 01 workshop */
 .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #D9D4CC; border: 1px solid #D9D4CC; margin-top: 56px; }
 .grid3 > div { background: var(--paper); padding: clamp(24px, 3vw, 40px); }
@@ -280,6 +305,7 @@ body.on-red .wa::before { animation: none; }
   <div class="wrap">
     <a href="#inicio" aria-label="Início"><img class="logo" src="assets/brand/muva_logo_full_white.svg" alt="MUVA House" /></a>
     <nav aria-label="Índice">
+      <a href="#depoimentos"><span>00</span>Depoimentos</a>
       <a href="#workshop"><span>01</span>O workshop</a>
       <a href="#jean"><span>02</span>Quem conduz</a>
       <a href="#case"><span>03</span>O case</a>
@@ -312,6 +338,39 @@ body.on-red .wa::before { animation: none; }
     </div>
   </div>
   <div class="scrollhint">Role para baixo ↓</div>
+</section>
+
+<!-- depoimentos (prova social logo depois da chamada) -->
+<section class="deps" id="depoimentos">
+  <div class="wrap">
+    <div class="head">
+      <div>
+        <div class="kicker">Quem já fez <b>·</b> turma de 15/10</div>
+        <h2>O que a primeira turma disse<span class="dot">.</span></h2>
+      </div>
+    </div>
+    <div class="vids">
+      <figure class="dv rv">
+        <div class="fr"><video preload="none" playsinline poster="assets/dep/tulio.jpg" src="assets/dep/tulio.mp4"></video>
+          <button class="pl" aria-label="Assistir ao depoimento de Túlio Pires Bragança"><span class="c"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#0A0A0A"/></svg></span><q>Tem cases reais para mostrar, não vai ficar dando uma de coach. Vai jogar a real.</q></button></div>
+        <figcaption><b>Túlio Pires Bragança</b><span>Produção e gestão de projetos criativos · Fox, NBC, Paramount</span></figcaption>
+      </figure>
+      <figure class="dv rv d1">
+        <div class="fr"><video preload="none" playsinline poster="assets/dep/herik.jpg" src="assets/dep/herik.mp4"></video>
+          <button class="pl" aria-label="Assistir ao depoimento de Herik Campos"><span class="c"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#0A0A0A"/></svg></span><q>Todas as dúvidas que eu tinha sobre agentes, ele mostrou na prática. Passei o dia inteiro montando o fluxo.</q></button></div>
+        <figcaption><b>Herik Campos</b><span>Artista 3D e IA</span></figcaption>
+      </figure>
+      <figure class="dv rv d2">
+        <div class="fr"><video preload="none" playsinline poster="assets/dep/rodolfo.jpg" src="assets/dep/rodolfo.mp4"></video>
+          <button class="pl" aria-label="Assistir ao depoimento de Rodolfo Roth"><span class="c"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#0A0A0A"/></svg></span><q>Tem muito processo que ninguém ensina. Genial demais.</q></button></div>
+        <figcaption><b>Rodolfo Roth</b><span>Criativo e educador</span></figcaption>
+      </figure>
+    </div>
+    <div class="txts">
+      <div class="tq rv"><p>“Foi fino demais. Muito da lógica do que vínhamos implementando aqui, mas de uma forma muito mais sofisticada.”</p><b>Leonardo Oliveira</b><span>Hotmart</span></div>
+      <div class="tq rv d1"><p>“Excelentíssimo workshop. O material é muito rico e vale essa destrinchada.”</p><b>Paulo Sampaio</b><span>Turma de 15/10</span></div>
+    </div>
+  </div>
 </section>
 
 <!-- 01 · o workshop -->
@@ -550,6 +609,16 @@ body.on-red .wa::before { animation: none; }
   var clip = document.getElementById('clip'), player = document.getElementById('player');
   document.getElementById('playbtn').addEventListener('click', function () { player.classList.add('playing'); clip.play(); });
   clip.addEventListener('play', function () { player.classList.add('playing'); });
+
+  // depoimentos: clique toca com som e pausa os outros vídeos
+  var allV = Array.prototype.slice.call(document.querySelectorAll('.dv video, #clip'));
+  function solo(v) { allV.forEach(function (o) { if (o !== v && !o.paused) o.pause(); }); }
+  document.querySelectorAll('.dv').forEach(function (f) {
+    var v = f.querySelector('video');
+    f.querySelector('.pl').addEventListener('click', function () { f.classList.add('on'); v.controls = true; v.muted = false; solo(v); v.play(); });
+    v.addEventListener('play', function () { solo(v); });
+  });
+  clip.addEventListener('play', function () { solo(clip); });
 
   // topo com borda ao rolar + item ativo no índice
   var top = document.getElementById('top');
