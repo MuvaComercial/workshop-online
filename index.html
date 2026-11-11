@@ -1,0 +1,600 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Workshop Online · Agentes de IA para Audiovisual · Jean Campos / MUVA House</title>
+<meta name="description" content="Workshop online de 6 horas com Jean Campos: agentes de IA para audiovisual e criação de conteúdo, do roteiro à entrega final. Turmas fechadas de até 8 pessoas." />
+<meta property="og:title" content="Workshop Online · Agentes de IA para Audiovisual" />
+<meta property="og:description" content="6 horas ao vivo, do roteiro à entrega final, com um time de agentes. Com Jean Campos / MUVA House." />
+<meta property="og:image" content="assets/media/clipe_falamansa_poster.jpg" />
+<meta property="og:type" content="website" />
+<meta name="theme-color" content="#0A0A0A" />
+<link rel="icon" href="assets/brand/muva_symbol_red.svg" type="image/svg+xml" />
+<style>
+@font-face { font-family: 'Jaapokki'; src: url('assets/fonts/Jaapokki-Regular.otf') format('opentype'); font-display: swap; }
+@font-face { font-family: 'Lato'; src: url('assets/fonts/Lato-Light.ttf') format('truetype'); font-weight: 300; font-display: swap; }
+@font-face { font-family: 'Lato'; src: url('assets/fonts/Lato-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Lato'; src: url('assets/fonts/Lato-Italic.ttf') format('truetype'); font-weight: 400; font-style: italic; font-display: swap; }
+@font-face { font-family: 'Lato'; src: url('assets/fonts/Lato-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Source Code Pro'; src: url('assets/fonts/SourceCodePro-Regular.ttf') format('truetype'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Source Code Pro'; src: url('assets/fonts/SourceCodePro-Bold.ttf') format('truetype'); font-weight: 700; font-display: swap; }
+
+:root {
+  --black: #0A0A0A; --ink: #141414; --graphite: #2A2827; --ash: #5E5B57; --smoke: #8A8680;
+  --fog: #B8B4AE; --paper: #F4F1EC; --red: #E8341C; --red-bright: #FF4A2E; --red-deep: #B3120F;
+  --gut: clamp(16px, 4vw, 64px); --max: 1360px;
+  --wa: 'https://api.whatsapp.com/send?phone=5541998302251';
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 72px; overflow-x: clip; }
+body { margin: 0; background: var(--black); color: var(--paper); font: 400 18px/1.55 'Lato', system-ui, sans-serif; -webkit-font-smoothing: antialiased; overflow-x: clip; }
+img, video { display: block; max-width: 100%; }
+a { color: inherit; }
+.jp { font-family: 'Jaapokki', 'Lato', sans-serif; text-transform: uppercase; font-weight: 400; }
+.mono { font-family: 'Source Code Pro', ui-monospace, monospace; }
+.red { color: var(--red); }
+.dot { color: var(--red); }
+.wrap { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--gut); }
+.kicker { font-family: 'Source Code Pro', monospace; font-size: 13px; letter-spacing: .38em; text-transform: uppercase; color: var(--fog); }
+.kicker b { color: var(--red); font-weight: 700; }
+.hair { height: 1px; background: var(--graphite); border: 0; margin: 0; }
+
+/* ---------- topo / índice ---------- */
+.top { position: fixed; inset: 0 0 auto 0; z-index: 40; background: rgba(10,10,10,.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.top.on { border-bottom-color: var(--graphite); }
+.top .wrap { display: flex; align-items: center; gap: 24px; height: 64px; }
+.top .logo { height: 22px; width: auto; flex: none; }
+.top nav { display: flex; gap: 22px; margin-left: auto; overflow-x: auto; scrollbar-width: none; }
+.top nav::-webkit-scrollbar { display: none; }
+.top nav a { text-decoration: none; font: 400 12px/1 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--smoke); white-space: nowrap; padding: 6px 0; border-bottom: 1px solid transparent; transition: color .2s, border-color .2s; }
+.top nav a span { color: var(--red); margin-right: 6px; }
+.top nav a:hover, .top nav a.act { color: var(--paper); border-bottom-color: var(--red); }
+.top .cta-s { flex: none; text-decoration: none; font: 700 12px/1 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; background: var(--red); color: var(--black); padding: 12px 16px; border-radius: 2px; }
+@media (max-width: 1080px) { .top nav { display: none; } .top .cta-s { margin-left: auto; } }
+
+/* ---------- hero ---------- */
+.hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding: 120px 0 56px; }
+.hero video.bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .0; transition: opacity 1.2s; }
+.hero video.bg.on { opacity: .42; }
+.hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(10,10,10,.55) 0%, rgba(10,10,10,.2) 35%, rgba(10,10,10,.92) 82%, var(--black) 100%); pointer-events: none; }
+.hero .diag { position: absolute; inset: 0; z-index: 1; pointer-events: none; background: linear-gradient(to top right, transparent calc(50% - .5px), rgba(244,241,236,.12) 50%, transparent calc(50% + .5px)); }
+.hero .wrap { position: relative; z-index: 2; }
+.hero h1 { font-family: 'Jaapokki', sans-serif; text-transform: uppercase; font-weight: 400; font-size: clamp(44px, 9.2vw, 168px); line-height: 1.06; letter-spacing: -.01em; margin: 18px 0 28px; max-width: 13ch; }
+.hero h1 .ln { display: block; overflow: hidden; padding-top: .2em; margin-top: -.2em; }
+.hero h1 .ln > span { display: inline-block; transform: translateY(105%); animation: up .9s cubic-bezier(.2,.8,.2,1) forwards; }
+.hero h1 .ln:nth-child(2) > span { animation-delay: .12s; } .hero h1 .ln:nth-child(3) > span { animation-delay: .24s; } .hero h1 .ln:nth-child(4) > span { animation-delay: .36s; }
+@keyframes up { to { transform: none; } }
+.hero .lead { font-size: clamp(18px, 1.9vw, 26px); line-height: 1.45; max-width: 46ch; color: var(--paper); margin: 0 0 32px; font-weight: 300; }
+.hero .lead b { font-weight: 700; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 36px; }
+.chip { font: 700 12px/1 'Source Code Pro', monospace; letter-spacing: .12em; text-transform: uppercase; padding: 10px 12px; border: 1px solid var(--graphite); background: rgba(10,10,10,.6); border-radius: 2px; }
+.chip.r { background: var(--red); color: var(--black); border-color: var(--red); }
+.btns { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+.btn { display: inline-flex; align-items: center; gap: 12px; text-decoration: none; font: 700 14px/1 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; padding: 18px 22px; border-radius: 2px; transition: transform .2s, background .2s, box-shadow .2s; }
+.btn.p { background: var(--red); color: var(--black); }
+.btn.p:hover { background: var(--red-bright); transform: translateY(-2px); box-shadow: 0 0 0 1px rgba(232,52,28,.5), 0 0 40px rgba(232,52,28,.3); }
+.btn.g { border: 1px solid var(--graphite); color: var(--paper); }
+.btn.g:hover { border-color: var(--paper); }
+.btn svg { width: 18px; height: 18px; flex: none; }
+.scrollhint { position: absolute; right: var(--gut); bottom: 56px; z-index: 2; writing-mode: vertical-rl; font: 400 11px 'Source Code Pro', monospace; letter-spacing: .3em; color: var(--smoke); text-transform: uppercase; }
+@media (max-width: 720px) { .scrollhint { display: none; } }
+
+/* ---------- seções ---------- */
+section.sec { padding: clamp(72px, 11vw, 160px) 0; position: relative; }
+section.paper { background: var(--paper); color: var(--black); }
+section.paper .kicker { color: var(--ash); }
+section.ink { background: var(--ink); }
+.sechead { display: grid; grid-template-columns: auto 1fr auto; align-items: end; gap: 16px; padding-bottom: 14px; border-bottom: 1px solid var(--graphite); margin-bottom: clamp(40px, 6vw, 80px); }
+section.paper .sechead { border-bottom-color: #D9D4CC; }
+.sechead .n { font: 700 14px 'Source Code Pro', monospace; color: var(--red); }
+.sechead .t { font: 400 13px 'Source Code Pro', monospace; letter-spacing: .3em; text-transform: uppercase; }
+.sechead .m { font: 400 12px 'Source Code Pro', monospace; letter-spacing: .1em; color: var(--smoke); text-transform: uppercase; text-align: right; }
+@media (max-width: 640px) { .sechead .m { display: none; } .sechead { grid-template-columns: auto 1fr; } }
+h2.big { font-family: 'Jaapokki', sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(38px, 6.6vw, 112px); line-height: 1; margin: 0 0 32px; letter-spacing: -.005em; max-width: 16ch; }
+h3.mid { font-family: 'Jaapokki', sans-serif; font-weight: 400; text-transform: uppercase; font-size: clamp(26px, 3vw, 44px); line-height: 1; margin: 0 0 14px; }
+p.lead2 { font-size: clamp(18px, 1.7vw, 24px); line-height: 1.5; font-weight: 300; max-width: 60ch; margin: 0 0 20px; }
+.arrow { display: inline-block; width: .7em; height: .7em; margin-left: .15em; vertical-align: .05em; }
+
+/* reveal */
+.rv { opacity: 0; transform: translateY(28px); transition: opacity .8s cubic-bezier(.2,.8,.2,1), transform .8s cubic-bezier(.2,.8,.2,1); }
+.rv.in { opacity: 1; transform: none; }
+.rv.d1 { transition-delay: .08s } .rv.d2 { transition-delay: .16s } .rv.d3 { transition-delay: .24s } .rv.d4 { transition-delay: .32s }
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } .hero h1 .ln > span { animation: none; transform: none; } .marq .track { animation: none !important; } }
+
+/* 01 workshop */
+.grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: #D9D4CC; border: 1px solid #D9D4CC; margin-top: 56px; }
+.grid3 > div { background: var(--paper); padding: clamp(24px, 3vw, 40px); }
+.grid3 .num { font: 700 13px 'Source Code Pro', monospace; color: var(--red); letter-spacing: .1em; margin-bottom: 40px; display: block; }
+.grid3 p { margin: 0; color: #3A3836; }
+@media (max-width: 900px) { .grid3 { grid-template-columns: 1fr; } }
+.quote { margin: clamp(56px, 8vw, 96px) 0 0; padding-left: 24px; border-left: 3px solid var(--red); max-width: 34ch; font-size: clamp(24px, 3vw, 40px); line-height: 1.2; font-style: italic; }
+.quote cite { display: block; margin-top: 14px; font: normal 400 12px 'Source Code Pro', monospace; letter-spacing: .3em; text-transform: uppercase; color: var(--ash); }
+
+/* 02 jean */
+.jean { display: grid; grid-template-columns: minmax(260px, 5fr) 7fr; gap: clamp(32px, 6vw, 96px); align-items: start; }
+.jean .ph { position: relative; aspect-ratio: 1; border-radius: 50%; overflow: hidden; border: 1px solid var(--graphite); max-width: 460px; }
+.jean .ph img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); }
+.jean .ph::after { content: ''; position: absolute; inset: 10px; border-radius: 50%; border: 1px solid rgba(232,52,28,.55); }
+.jean .ring { position: relative; }
+.jean .ring svg { position: absolute; inset: -18px; width: calc(100% + 36px); height: calc(100% + 36px); max-width: 496px; }
+.jean .ring svg circle:last-child { transform-origin: 50% 50%; transform-box: fill-box; animation: spin 40s linear infinite; }
+#jean { overflow: hidden; }
+@media (max-width: 860px) { .jean .kicker { display: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+.jean h2.big { font-size: clamp(44px, 6vw, 96px); margin-bottom: 8px; }
+.jean .role { font: 400 13px 'Source Code Pro', monospace; letter-spacing: .3em; text-transform: uppercase; color: var(--fog); margin-bottom: 28px; }
+.jean p { color: #D8D4CD; max-width: 60ch; }
+@media (max-width: 860px) { .jean { grid-template-columns: 1fr; } .jean .ring { max-width: 340px; margin: 0 auto 8px; } }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--graphite); border-bottom: 1px solid var(--graphite); margin: 40px 0; }
+.stats > div { padding: 22px 16px 22px 0; min-width: 0; }
+.stats > div + div { padding-left: 20px; border-left: 1px solid var(--graphite); }
+.stats .v { font-family: 'Jaapokki', sans-serif; font-size: clamp(40px, 5vw, 76px); line-height: 1; }
+.stats .v i { font-style: normal; color: var(--red); }
+.stats .l { font: 400 12px 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--smoke); margin-top: 8px; }
+.awards { display: flex; flex-wrap: wrap; gap: 8px; }
+.awards span { font: 700 12px/1 'Source Code Pro', monospace; letter-spacing: .1em; text-transform: uppercase; padding: 10px 12px; border: 1px solid var(--graphite); border-radius: 2px; }
+.awards span b { color: var(--red); }
+.marqwrap { margin-top: clamp(64px, 9vw, 120px); }
+.marqwrap .kicker { margin-bottom: 26px; display: block; }
+.marq { overflow: hidden; position: relative; padding: 18px 0; -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marq .track { display: flex; gap: clamp(40px, 6vw, 88px); width: max-content; animation: mq 48s linear infinite; align-items: center; }
+.marq.rev .track { animation-direction: reverse; animation-duration: 56s; }
+.marq img { height: clamp(28px, 3.4vw, 46px); width: auto; opacity: .72; transition: opacity .2s; }
+.marq img:hover { opacity: 1; }
+.marq img.sm { height: clamp(18px, 2.2vw, 30px); }
+@keyframes mq { to { transform: translateX(-50%); } }
+
+/* 03 case */
+.case-top { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 5vw, 80px); align-items: end; margin-bottom: 40px; }
+@media (max-width: 860px) { .case-top { grid-template-columns: 1fr; } }
+.player { position: relative; aspect-ratio: 16/9; background: #000; border: 1px solid var(--graphite); overflow: hidden; }
+.player video { width: 100%; height: 100%; object-fit: cover; }
+.player .play { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 18px; background: linear-gradient(0deg, rgba(10,10,10,.75), rgba(10,10,10,.15)); border: 0; color: var(--paper); cursor: pointer; transition: background .3s; }
+.player .play:hover { background: linear-gradient(0deg, rgba(10,10,10,.6), rgba(10,10,10,.05)); }
+.player .play .c { width: clamp(68px, 9vw, 112px); height: clamp(68px, 9vw, 112px); border-radius: 50%; background: var(--red); display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 10px rgba(232,52,28,.18); transition: transform .25s; }
+.player .play:hover .c { transform: scale(1.06); }
+.player .play .c svg { width: 34%; height: 34%; margin-left: 6%; }
+.player .play .lab { font: 700 12px 'Source Code Pro', monospace; letter-spacing: .3em; text-transform: uppercase; }
+.player.playing .play { display: none; }
+@media (max-width: 640px) { .player .play .lab { display: none; } }
+.nums { display: grid; grid-template-columns: repeat(6, 1fr); margin-top: 2px; border: 1px solid var(--graphite); border-top: 0; }
+.nums > div { padding: 22px 18px; border-left: 1px solid var(--graphite); }
+.nums > div:first-child { border-left: 0; }
+.nums .v { font-family: 'Jaapokki', sans-serif; font-size: clamp(34px, 3.8vw, 60px); line-height: 1; }
+.nums .v i { font-style: normal; color: var(--red); }
+.nums .l { font: 400 11px/1.4 'Source Code Pro', monospace; letter-spacing: .1em; text-transform: uppercase; color: var(--smoke); margin-top: 10px; }
+@media (max-width: 980px) { .nums { grid-template-columns: repeat(3, 1fr); } .nums > div:nth-child(4) { border-left: 0; } .nums > div:nth-child(n+4) { border-top: 1px solid var(--graphite); } }
+@media (max-width: 520px) { .nums { grid-template-columns: repeat(2, 1fr); } .nums > div { border-left: 0 !important; border-top: 1px solid var(--graphite); } .nums > div:nth-child(even) { border-left: 1px solid var(--graphite) !important; } .nums > div:nth-child(-n+2) { border-top: 0; } }
+.kfstrip { margin-top: 56px; }
+.kfstrip .track { animation-duration: 70s; gap: 12px; }
+.kfstrip img { height: clamp(110px, 14vw, 190px); opacity: 1; border: 1px solid var(--graphite); }
+.proc { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 56px; }
+.proc figure { margin: 0; }
+.proc img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border: 1px solid var(--graphite); }
+.proc figcaption { font: 400 11px 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--smoke); margin-top: 10px; }
+.proc figcaption b { color: var(--red); margin-right: 6px; }
+@media (max-width: 860px) { .proc { grid-template-columns: repeat(2, 1fr); } }
+
+/* 04 programa */
+.prog { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: #D9D4CC; border: 1px solid #D9D4CC; }
+@media (max-width: 900px) { .prog { grid-template-columns: 1fr; } }
+.prog > div { background: var(--paper); padding: clamp(24px, 3.4vw, 48px); }
+.prog .when { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid #D9D4CC; padding-bottom: 14px; margin-bottom: 28px; }
+.prog .when .h { font-family: 'Jaapokki', sans-serif; font-size: clamp(48px, 6vw, 88px); line-height: .9; }
+.prog .when .h i { font-style: normal; color: var(--red); }
+.prog .when .p { font: 700 12px 'Source Code Pro', monospace; letter-spacing: .3em; text-transform: uppercase; color: var(--ash); }
+.prog ul { list-style: none; padding: 0; margin: 0; }
+.prog li { display: grid; grid-template-columns: 34px 1fr; gap: 10px; padding: 14px 0; border-bottom: 1px solid #E4DFD7; }
+.prog li:last-child { border-bottom: 0; }
+.prog li .i { font: 700 13px 'Source Code Pro', monospace; color: var(--red); padding-top: 3px; }
+.prog li b { display: block; font-weight: 700; margin-bottom: 2px; }
+.prog li span.s { color: #4A4744; font-size: 16px; }
+.verbs { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 56px; border-top: 2px solid var(--black); }
+.verbs > div { padding: 20px 16px 0 0; }
+.verbs .vn { font: 700 12px 'Source Code Pro', monospace; color: var(--red); letter-spacing: .1em; }
+.verbs .vv { font-family: 'Jaapokki', sans-serif; text-transform: uppercase; font-size: clamp(22px, 2.2vw, 34px); line-height: 1; margin: 10px 0 10px; }
+.verbs p { margin: 0; font-size: 15px; color: #4A4744; line-height: 1.45; }
+@media (max-width: 900px) { .verbs { grid-template-columns: 1fr 1fr; gap: 24px 16px; } }
+@media (max-width: 520px) { .verbs { grid-template-columns: 1fr; } }
+
+/* 05 nuvem */
+.cloud { display: grid; grid-template-columns: 6fr 5fr; gap: clamp(32px, 6vw, 96px); align-items: end; }
+@media (max-width: 900px) { .cloud { grid-template-columns: 1fr; } }
+.tag-extra { display: inline-block; background: var(--red); color: var(--black); font: 700 12px/1 'Source Code Pro', monospace; letter-spacing: .3em; text-transform: uppercase; padding: 9px 12px; margin-bottom: 26px; border-radius: 2px; }
+.cloud ul { list-style: none; margin: 32px 0 0; padding: 0; }
+.cloud li { display: grid; grid-template-columns: 22px 1fr; gap: 12px; padding: 14px 0; border-top: 1px solid var(--graphite); color: #D8D4CD; }
+.cloud li::before { content: '↘'; color: var(--red); font-weight: 700; }
+.rack { border: 1px solid var(--graphite); padding: 22px; background: var(--black); }
+.rack .hd { display: flex; justify-content: space-between; font: 400 11px 'Source Code Pro', monospace; letter-spacing: .16em; text-transform: uppercase; color: var(--smoke); margin-bottom: 18px; }
+.rack .hd b { color: var(--red); }
+.machines { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.mch { border: 1px solid var(--graphite); padding: 10px 10px 12px; font: 400 10px 'Source Code Pro', monospace; letter-spacing: .1em; color: var(--ash); transition: border-color .4s, color .4s, background .4s; }
+.mch .bar { height: 3px; background: var(--graphite); margin-top: 10px; overflow: hidden; }
+.mch .bar i { display: block; height: 100%; width: 0; background: var(--red); }
+.mch.on { border-color: rgba(232,52,28,.6); color: var(--paper); background: rgba(232,52,28,.06); }
+.mch.on .bar i { animation: load 2.4s ease-in-out infinite; }
+@keyframes load { 0% { width: 0 } 70% { width: 100% } 100% { width: 100% } }
+.rack .ft { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; border-top: 1px solid var(--graphite); padding-top: 14px; }
+.rack .ft .c { font-family: 'Jaapokki', sans-serif; font-size: 48px; line-height: 1; }
+.rack .ft .c i { font-style: normal; color: var(--red); }
+.rack .ft .l { font: 400 11px 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--smoke); text-align: right; }
+
+/* 06 para quem */
+.who { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(24px, 4vw, 64px); }
+@media (max-width: 860px) { .who { grid-template-columns: 1fr; } }
+.who .col h3 { display: flex; align-items: baseline; gap: 14px; border-bottom: 2px solid var(--paper); padding-bottom: 12px; }
+.who .col h3 small { font: 700 15px 'Source Code Pro', monospace; color: var(--red); letter-spacing: .1em; }
+.who ul { list-style: none; padding: 0; margin: 0; }
+.who li { padding: 16px 0; border-bottom: 1px solid var(--graphite); }
+.who li b { display: block; font-size: 19px; }
+.who li span { color: var(--fog); font-size: 16px; }
+
+/* 07 investimento */
+.inv { background: var(--red); color: var(--black); }
+.inv .sechead { border-bottom-color: rgba(10,10,10,.3); }
+.inv .sechead .n, .inv .sechead .m { color: var(--black); }
+.price { display: grid; grid-template-columns: 7fr 5fr; gap: clamp(32px, 6vw, 96px); align-items: end; }
+@media (max-width: 900px) { .price { grid-template-columns: 1fr; } }
+.price .val { font-family: 'Jaapokki', sans-serif; font-size: clamp(88px, 17vw, 260px); line-height: .82; letter-spacing: -.02em; }
+.price .val small { font-size: .3em; vertical-align: .95em; margin-right: .08em; }
+.price .par { font: 700 clamp(14px, 1.5vw, 18px) 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; margin-top: 18px; }
+.price ul { list-style: none; padding: 0; margin: 0 0 28px; border-top: 1px solid rgba(10,10,10,.3); }
+.price li { display: flex; justify-content: space-between; gap: 16px; padding: 14px 0; border-bottom: 1px solid rgba(10,10,10,.3); font-size: 17px; }
+.price li span:first-child { font: 700 13px 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; padding-top: 3px; color: var(--black); }
+.price li span:last-child { font-weight: 700; text-align: right; }
+.btn.k { background: var(--black); color: var(--paper); width: 100%; justify-content: center; padding: 22px; font-size: 15px; }
+.btn.k:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(10,10,10,.35); }
+.inv .note { font-size: 16px; margin-top: 14px; color: var(--black); }
+@media (max-width: 860px) { .inv { padding-bottom: 120px; } }
+
+/* rodapé */
+footer { padding: 56px 0 120px; border-top: 1px solid var(--graphite); }
+footer .wrap { display: flex; flex-wrap: wrap; gap: 24px; justify-content: space-between; align-items: center; }
+footer img { height: 34px; width: auto; }
+footer .f { font: 400 12px 'Source Code Pro', monospace; letter-spacing: .14em; text-transform: uppercase; color: var(--smoke); }
+footer .f a { text-decoration: none; color: var(--paper); }
+
+/* WhatsApp flutuante (padrão MUVA: ícone + "Fale conosco") */
+.wa { position: fixed; right: 20px; bottom: 20px; z-index: 50; display: flex; align-items: center; height: 60px; border-radius: 30px; background: var(--red); color: var(--black); text-decoration: none; box-shadow: 0 10px 30px rgba(0,0,0,.45); overflow: hidden; max-width: 60px; transition: max-width .45s cubic-bezier(.2,.8,.2,1), background .2s; }
+.wa:hover, .wa.peek { max-width: 260px; background: var(--red-bright); }
+.wa .ic { width: 60px; height: 60px; flex: none; display: flex; align-items: center; justify-content: center; }
+.wa .ic svg { width: 28px; height: 28px; }
+.wa .tx { white-space: nowrap; font: 700 13px 'Source Code Pro', monospace; letter-spacing: .12em; text-transform: uppercase; padding-right: 22px; }
+.wa::before { content: ''; position: absolute; inset: 0; border-radius: 30px; box-shadow: 0 0 0 0 rgba(232,52,28,.6); animation: pulse 2.4s infinite; pointer-events: none; }
+body.on-red .wa { background: var(--black); color: var(--paper); }
+body.on-red .wa::before { animation: none; }
+@media (max-width: 520px) { .wa { right: 12px; bottom: 12px; height: 52px; max-width: 52px; } .wa .ic { width: 52px; height: 52px; } .wa .ic svg { width: 24px; height: 24px; } .stats { margin-bottom: 72px; } }
+@keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(232,52,28,.55) } 70% { box-shadow: 0 0 0 16px rgba(232,52,28,0) } 100% { box-shadow: 0 0 0 0 rgba(232,52,28,0) } }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.64.07-.3-.15-1.26-.46-2.39-1.47-.88-.79-1.48-1.76-1.65-2.06-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.07 2.88 1.21 3.08.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.12-.27-.2-.57-.35M12.05 21.5h-.01a9.4 9.4 0 0 1-4.8-1.32l-.34-.2-3.57.94.95-3.48-.22-.36a9.39 9.39 0 0 1-1.44-5.01c0-5.2 4.23-9.43 9.44-9.43a9.37 9.37 0 0 1 6.67 2.77 9.37 9.37 0 0 1 2.76 6.67c0 5.2-4.24 9.43-9.44 9.43m8.03-17.46A11.27 11.27 0 0 0 12.05.72C5.79.72.7 5.8.7 12.06c0 2 .52 3.95 1.52 5.67L.6 23.6l6.01-1.58a11.33 11.33 0 0 0 5.43 1.38h.01c6.25 0 11.34-5.09 11.35-11.34 0-3.03-1.18-5.88-3.32-8.02"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 5l14 14M19 7v12H7" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="square"/></symbol>
+</svg>
+
+<!-- topo + índice -->
+<header class="top" id="top">
+  <div class="wrap">
+    <a href="#inicio" aria-label="Início"><img class="logo" src="assets/brand/muva_logo_full_white.svg" alt="MUVA House" /></a>
+    <nav aria-label="Índice">
+      <a href="#workshop"><span>01</span>O workshop</a>
+      <a href="#jean"><span>02</span>Quem conduz</a>
+      <a href="#case"><span>03</span>O case</a>
+      <a href="#programa"><span>04</span>Programa</a>
+      <a href="#nuvem"><span>05</span>Nuvem e escala</a>
+      <a href="#para-quem"><span>06</span>Para quem</a>
+      <a href="#investimento"><span>07</span>Investimento</a>
+    </nav>
+    <a class="cta-s js-wa" href="#" data-msg="vaga">Quero minha vaga</a>
+  </div>
+</header>
+
+<!-- 00 · chamada -->
+<section class="hero" id="inicio">
+  <video class="bg" id="herovid" muted playsinline autoplay preload="auto" poster="assets/kf/kf06.jpg"></video>
+  <div class="diag"></div>
+  <div class="wrap">
+    <div class="kicker">Workshop online <b>·</b> Jean Campos / MUVA House</div>
+    <h1><span class="ln"><span>Agentes de IA</span></span><span class="ln"><span>para audiovisual</span></span><span class="ln"><span>e criação de</span></span><span class="ln"><span>conteúdo<span class="dot">.</span></span></span></h1>
+    <p class="lead">Em <b>6 horas ao vivo</b>, a gente faz um conteúdo do <b>roteiro à entrega final</b> com um time de agentes. Você vê como os agentes funcionam e aprende a construir os seus.</p>
+    <div class="chips">
+      <span class="chip r">6 horas ao vivo</span>
+      <span class="chip">2h manhã + 4h tarde</span>
+      <span class="chip">Turmas de até 8 pessoas</span>
+      <span class="chip">R$ 800 · 2x no Pix</span>
+    </div>
+    <div class="btns">
+      <a class="btn p js-wa" href="#" data-msg="vaga"><svg><use href="#i-wa"/></svg>Quero minha vaga</a>
+      <a class="btn g" href="#programa">Ver o programa <svg><use href="#i-arrow"/></svg></a>
+    </div>
+  </div>
+  <div class="scrollhint">Role para baixo ↓</div>
+</section>
+
+<!-- 01 · o workshop -->
+<section class="sec paper" id="workshop">
+  <div class="wrap">
+    <div class="sechead"><span class="n">01</span><span class="t">O workshop</span><span class="m">Agentes · audiovisual · conteúdo</span></div>
+    <h2 class="big rv">Do roteiro à entrega. Com agentes<span class="dot">.</span></h2>
+    <p class="lead2 rv d1">Gerar imagem e vídeo ficou fácil. O difícil continua sendo organizar, decidir, manter a consistência, aprovar e entregar na data. Este workshop mostra um método de estúdio para produzir com IA no mundo real: com cliente, briefing, refação, orçamento e prazo.</p>
+    <p class="lead2 rv d2">Cada departamento de um estúdio virou um agente com uma função única. O ofício continua. Mudou quem faz, quanto tempo leva e quanto custa errar.</p>
+    <div class="grid3">
+      <div class="rv"><span class="num">01 / Entender</span><h3 class="mid">Como os agentes funcionam</h3><p>O que é um agente: instruções com uma função única e acesso controlado às ferramentas e às pastas do projeto. Um agente por função, para cada um aprender com mais precisão.</p></div>
+      <div class="rv d1"><span class="num">02 / Construir</span><h3 class="mid">Como construir os seus</h3><p>O diretor pede em linguagem natural, o agente executa, a correção vira regra e a regra vira um comando reutilizável. Sem escrever prompt à mão.</p></div>
+      <div class="rv d2"><span class="num">03 / Entregar</span><h3 class="mid">Um conteúdo, do começo ao fim</h3><p>Ao longo das 6 horas, a turma acompanha um conteúdo nascer do roteiro e chegar à entrega final, etapa por etapa, com os agentes trabalhando.</p></div>
+    </div>
+    <blockquote class="quote rv">“O diretor não escreve prompt: ele olha e fala o que quer. O time de agentes faz o trabalho braçal.”<cite>Jean Campos</cite></blockquote>
+  </div>
+</section>
+
+<!-- 02 · quem conduz -->
+<section class="sec" id="jean">
+  <div class="wrap">
+    <div class="sechead"><span class="n">02</span><span class="t">Quem conduz</span><span class="m">24 anos de mercado</span></div>
+    <div class="jean">
+      <div class="ring rv">
+        <svg viewBox="0 0 100 100" aria-hidden="true"><circle cx="50" cy="50" r="49" fill="none" stroke="#2A2827" stroke-width=".3"/><circle cx="50" cy="50" r="49" fill="none" stroke="#E8341C" stroke-width=".6" stroke-dasharray="6 302"/></svg>
+        <div class="ph"><img src="assets/media/jean.jpg" alt="Jean Campos" loading="lazy" /></div>
+      </div>
+      <div>
+        <div class="kicker rv">J E A N &nbsp; C A M P O S</div>
+        <h2 class="big rv d1">Jean Campos<span class="dot">.</span></h2>
+        <div class="role rv d1">Fundador e diretor criativo · MUVA House</div>
+        <p class="rv d2">Diretor criativo com 24 anos de mercado em publicidade, ilustração, direção de arte, animação, 3D, entretenimento, experiências imersivas e IA generativa. Foi Head de Criatividade e Inovação do Rock in Rio por 4 anos. Hoje dirige a MUVA House, um estúdio de criação e produção para projetos de alta complexidade.</p>
+        <p class="rv d2">É Professor Referência da pós-graduação da ESPM em IA Aplicada à Criatividade e Geração de Conteúdo. Tem projetos premiados e destaque internacional, da plataforma Behance à revista Digital Artist UK.</p>
+        <div class="stats rv d3">
+          <div><div class="v"><span class="cnt" data-to="24">24</span></div><div class="l">anos de mercado</div></div>
+          <div><div class="v"><i>+</i><span class="cnt" data-to="500">500</span></div><div class="l">projetos</div></div>
+          <div><div class="v"><i>+</i><span class="cnt" data-to="200">200</span></div><div class="l">clientes globais</div></div>
+        </div>
+        <div class="awards rv d4">
+          <span>Cannes Lions</span><span>Clio Awards</span><span>Lumière Awards</span><span><b>2x</b> FWA</span><span><b>26x</b> Behance</span><span>Digital Artist UK</span>
+        </div>
+      </div>
+    </div>
+    <div class="marqwrap">
+      <span class="kicker">Marcas e agências com quem trabalhamos</span>
+      <div class="marq"><div class="track" id="mq1"></div></div>
+      <div class="marq rev"><div class="track" id="mq2"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 · o case -->
+<section class="sec ink" id="case">
+  <div class="wrap">
+    <div class="sechead"><span class="n">03</span><span class="t">O case · metodologia</span><span class="m">Clipe animado · Falamansa</span></div>
+    <div class="case-top">
+      <h2 class="big rv" style="margin:0">Um diretor. Um estúdio de agentes<span class="dot">.</span></h2>
+      <p class="lead2 rv d1" style="margin:0">A metodologia do workshop saiu de um projeto real: o clipe animado do Falamansa, com 3 minutos e 54 planos, feito em 30 dias por um diretor à frente de um time de agentes. Cada agente assumiu uma função de estúdio. A mão do artista continuou no centro.</p>
+    </div>
+    <div class="player rv" id="player">
+      <video id="clip" preload="none" playsinline controls poster="assets/media/clipe_falamansa_poster.jpg" src="assets/media/clipe_falamansa_web.mp4"></video>
+      <button class="play" id="playbtn" aria-label="Assistir ao clipe"><span class="c"><svg viewBox="0 0 24 24"><path d="M6 4l14 8-14 8z" fill="#0A0A0A"/></svg></span><span class="lab">Assistir ao clipe · 3 min</span></button>
+    </div>
+    <div class="nums rv">
+      <div><div class="v"><span class="cnt" data-to="14">14</span></div><div class="l">agentes, cada um com uma função de estúdio</div></div>
+      <div><div class="v"><i>+</i><span class="cnt" data-to="10">10</span> mil</div><div class="l">imagens de pesquisa e desenvolvimento</div></div>
+      <div><div class="v"><i>~</i><span class="cnt" data-to="1600" data-fmt="pt">1.600</span></div><div class="l">vídeos gerados</div></div>
+      <div><div class="v"><span class="cnt" data-to="54">54</span></div><div class="l">planos no filme final</div></div>
+      <div><div class="v"><span class="cnt" data-to="30">30</span></div><div class="l">dias do roteiro à entrega</div></div>
+      <div><div class="v">4<i>→</i><span class="cnt" data-to="12">12</span></div><div class="l">máquinas na nuvem no pico</div></div>
+    </div>
+    <div class="proc">
+      <figure class="rv"><img src="assets/media/lam11_board.jpg" alt="Storyboard" loading="lazy" /><figcaption><b>01</b>Storyboard</figcaption></figure>
+      <figure class="rv d1"><img src="assets/media/lam11_folha_personagem.jpg" alt="Folha de personagem" loading="lazy" /><figcaption><b>02</b>Personagem</figcaption></figure>
+      <figure class="rv d2"><img src="assets/media/lam11_concept_cen02_casa_arvore_int.jpg" alt="Concept de cenário" loading="lazy" /><figcaption><b>03</b>Cenário</figcaption></figure>
+      <figure class="rv d3"><img src="assets/media/lam13_044_final.jpg" alt="Keyframe final" loading="lazy" /><figcaption><b>04</b>Keyframe · 71 variações</figcaption></figure>
+    </div>
+    <div class="marq kfstrip"><div class="track" id="mqkf"></div></div>
+  </div>
+</section>
+
+<!-- 04 · programa -->
+<section class="sec paper" id="programa">
+  <div class="wrap">
+    <div class="sechead"><span class="n">04</span><span class="t">Programa</span><span class="m">6 horas · ao vivo · online</span></div>
+    <h2 class="big rv">Seis horas, do roteiro à entrega final<span class="dot">.</span></h2>
+    <div class="prog">
+      <div class="rv">
+        <div class="when"><span class="h">2h<i>.</i></span><span class="p">Manhã · fundamentos</span></div>
+        <ul>
+          <li><span class="i">01</span><div><b>A pirâmide invertida</b><span class="s">O caro mudou de lugar: de executar para criar e decidir. Para onde vai o tempo e o investimento numa produção com IA.</span></div></li>
+          <li><span class="i">02</span><div><b>Como os agentes funcionam</b><span class="s">Função única, regras, travas e teto de gasto. Por que um agente por função.</span></div></li>
+          <li><span class="i">03</span><div><b>Como construir um agente</b><span class="s">Do pedido em linguagem natural ao comando reutilizável. Cada correção vira regra.</span></div></li>
+          <li><span class="i">04</span><div><b>O case por dentro</b><span class="s">Como o clipe do Falamansa foi organizado, do roteiro aos 54 planos.</span></div></li>
+        </ul>
+      </div>
+      <div class="rv d1">
+        <div class="when"><span class="h">4h<i>.</i></span><span class="p">Tarde · mão na massa</span></div>
+        <ul>
+          <li><span class="i">05</span><div><b>Do roteiro à bíblia do projeto</b><span class="s">Decupagem, códigos e organização antes da primeira imagem.</span></div></li>
+          <li><span class="i">06</span><div><b>Da referência ao keyframe</b><span class="s">Hierarquia de referências: o que manda em câmera, cor e escala.</span></div></li>
+          <li><span class="i">07</span><div><b>Orquestração e produção</b><span class="s">Agentes trabalhando em paralelo, testes em baixa e o que sobe para a versão final.</span></div></li>
+          <li><span class="i">08</span><div><b>Montagem e entrega</b><span class="s">O agente monta. O diretor corta. Aprovação no corte, nunca peça isolada.</span></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="verbs">
+      <div class="rv"><span class="vn">01</span><div class="vv">Enxergar</div><p>Crie os códigos antes da primeira arte.</p></div>
+      <div class="rv d1"><span class="vn">02</span><div class="vv">Interpretar</div><p>Defina por escrito qual referência manda.</p></div>
+      <div class="rv d2"><span class="vn">03</span><div class="vv">Direcionar</div><p>Estabeleça o teto de gasto antes do primeiro trabalho.</p></div>
+      <div class="rv d3"><span class="vn">04</span><div class="vv">Produzir</div><p>Decida rápido onde vale gastar.</p></div>
+      <div class="rv d4"><span class="vn">05</span><div class="vv">Finalizar</div><p>Aprove no corte, nunca isolado.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 · nuvem e escala -->
+<section class="sec" id="nuvem">
+  <div class="wrap">
+    <div class="sechead"><span class="n">05</span><span class="t">Conteúdo extra</span><span class="m">Nuvem e escala</span></div>
+    <div class="cloud">
+      <div>
+        <span class="tag-extra rv">Conteúdo extra</span>
+        <h2 class="big rv d1">Escala na nuvem. Várias frentes ao mesmo tempo<span class="dot">.</span></h2>
+        <p class="lead2 rv d2">Como usar a nuvem para ganhar escala e rodar várias tarefas ao mesmo tempo, com qualidade e sem depender de plataformas online.</p>
+        <ul class="rv d3">
+          <li>Máquinas ligadas só quando o projeto pede, e desligadas quando ele termina.</li>
+          <li>Imagem, vídeo e montagem rodando em paralelo, cada frente com o seu agente.</li>
+          <li>O fluxo e os arquivos ficam com você, sem créditos de plataforma.</li>
+          <li>No clipe: de 4 para 12 máquinas no pico, e de volta a uma base enxuta depois da entrega.</li>
+        </ul>
+        <blockquote class="quote rv" style="border-left-color:var(--red)">“Eu não comprei uma render farm.”<cite>Jean Campos</cite></blockquote>
+      </div>
+      <div class="rack rv d2" id="rack" aria-hidden="true">
+        <div class="hd"><span>Produção · nuvem</span><span><b>●</b> ao vivo</span></div>
+        <div class="machines" id="machines"></div>
+        <div class="ft"><span class="c"><span id="mcount">4</span><i>/</i>12</span><span class="l">máquinas<br/>em uso</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 06 · para quem -->
+<section class="sec ink" id="para-quem">
+  <div class="wrap">
+    <div class="sechead"><span class="n">06</span><span class="t">Para quem é</span><span class="m">Quem decide · quem executa</span></div>
+    <h2 class="big rv">Para os dois lados da mesa<span class="dot">.</span></h2>
+    <div class="who">
+      <div class="col rv">
+        <h3 class="mid"><small>A</small>Criatividade</h3>
+        <ul>
+          <li><b>Diretores de criação e de arte</b><span>Aprovar em volume sem perder a assinatura do trabalho.</span></li>
+          <li><b>Produtores e gestores de projetos criativos</b><span>Prazos curtos, centenas de versões, feedback espalhado.</span></li>
+          <li><b>Motion designers, artistas 3D e animadores</b><span>Onde a IA entra e onde o ofício continua.</span></li>
+          <li><b>Agências, estúdios e freelancers</b><span>Projetos de ponta a ponta com uma equipe enxuta.</span></li>
+        </ul>
+      </div>
+      <div class="col rv d1">
+        <h3 class="mid"><small>B</small>Corporativo</h3>
+        <ul>
+          <li><b>Líderes de marketing e de conteúdo</b><span>Mais conteúdo, mais rápido, sem perder marca nem qualidade.</span></li>
+          <li><b>Times de conteúdo in-house</b><span>Equipe pequena, demanda alta, muitos formatos.</span></li>
+          <li><b>Áreas de inovação</b><span>Do piloto de IA ao processo que se repete.</span></li>
+          <li><b>Gestores de orçamento e processo</b><span>Quanto custa de verdade produzir com IA e onde está o risco.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 · investimento -->
+<section class="sec inv" id="investimento">
+  <div class="wrap">
+    <div class="sechead"><span class="n">07</span><span class="t">Investimento</span><span class="m">Turmas fechadas</span></div>
+    <div class="price">
+      <div class="rv">
+        <div class="val"><small>R$</small>800</div>
+        <div class="par">Por pessoa · parcelado em 2x no Pix</div>
+      </div>
+      <div class="rv d1">
+        <ul>
+          <li><span>Formato</span><span>Online, ao vivo</span></li>
+          <li><span>Duração</span><span>6 horas · 2h manhã + 4h tarde</span></li>
+          <li><span>Turma</span><span>Fechada, até 8 pessoas</span></li>
+          <li><span>Pagamento</span><span>2x de R$ 400 no Pix</span></li>
+          <li><span>Datas</span><span>Próximas turmas pelo WhatsApp</span></li>
+        </ul>
+        <a class="btn k js-wa" href="#" data-msg="vaga"><svg><use href="#i-wa"/></svg>Quero minha vaga</a>
+        <p class="note">Fale direto com o Jean pelo WhatsApp para reservar sua vaga ou montar uma turma com a sua equipe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/brand/muva_logo_full_white.svg" alt="MUVA House" />
+    <div class="f">Workshop Online · Jean Campos / MUVA House · <a href="https://muvahouse.com" target="_blank" rel="noopener">muvahouse.com</a></div>
+  </div>
+</footer>
+
+<a class="wa js-wa" href="#" data-msg="duvida" aria-label="Fale conosco pelo WhatsApp"><span class="ic"><svg><use href="#i-wa"/></svg></span><span class="tx">Fale conosco</span></a>
+
+<script>
+(function () {
+  var PHONE = '5541998302251';
+  var MSG = {
+    vaga: 'Olá, Jean! Quero uma vaga no Workshop Online de agentes de IA para audiovisual. Quais são as próximas turmas?',
+    duvida: 'Olá, Jean! Vi a página do Workshop Online e tenho uma dúvida.'
+  };
+  document.querySelectorAll('.js-wa').forEach(function (a) {
+    a.href = 'https://api.whatsapp.com/send?phone=' + PHONE + '&text=' + encodeURIComponent(MSG[a.dataset.msg] || MSG.duvida);
+    a.target = '_blank'; a.rel = 'noopener noreferrer';
+  });
+
+  // logos dos clientes em duas faixas
+  var L = ['01_visa','02_tim','03_betc','04_case','05_heineken','06_ford','07_prime_video','08_jwt','09_cnh_industrial','10_africa','11_almapbbdo','12_netflix','13_mercedes_benz','14_johnnie_walker','15_starbucks','16_honda','17_havaianas','18_disney','19_yr','20_mcdonalds','21_paramount','22_iveco','23_ddb','24_coca_cola','25_publicis','26_rock_in_rio','27_nestle','28_gwm'];
+  function fill(id, list, base, ext, alt) {
+    var t = document.getElementById(id); if (!t) return;
+    var html = list.map(function (n) { return '<img' + (/almapbbdo|nestle/.test(n) ? ' class="sm"' : '') + ' src="' + base + n + ext + '" alt="' + (alt ? n.replace(/^\d+_/, '').replace(/_/g, ' ') : '') + '" loading="lazy" />'; }).join('');
+    t.innerHTML = html + html;
+  }
+  fill('mq1', L.slice(0, 14), 'assets/logos/', '.png', true);
+  fill('mq2', L.slice(14), 'assets/logos/', '.png', true);
+  var K = []; for (var i = 1; i <= 24; i++) K.push('kf' + (i < 10 ? '0' : '') + i);
+  fill('mqkf', K, 'assets/kf/', '.jpg', false);
+
+  // vídeo de fundo do hero: alterna 3 cortes do clipe
+  var hv = document.getElementById('herovid'), cuts = ['assets/media/bg_cut_01.mp4', 'assets/media/bg_cut_03.mp4', 'assets/media/bg_cut_09.mp4'], ci = 0;
+  function nextCut() { hv.src = cuts[ci % cuts.length]; ci++; var p = hv.play(); if (p && p.catch) p.catch(function () {}); }
+  hv.addEventListener('playing', function () { hv.classList.add('on'); });
+  hv.addEventListener('ended', nextCut);
+  nextCut();
+
+  // player do clipe
+  var clip = document.getElementById('clip'), player = document.getElementById('player');
+  document.getElementById('playbtn').addEventListener('click', function () { player.classList.add('playing'); clip.play(); });
+  clip.addEventListener('play', function () { player.classList.add('playing'); });
+
+  // topo com borda ao rolar + item ativo no índice
+  var top = document.getElementById('top');
+  var links = Array.prototype.slice.call(document.querySelectorAll('.top nav a'));
+  addEventListener('scroll', function () { top.classList.toggle('on', scrollY > 20); }, { passive: true });
+  var secObs = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('act', a.getAttribute('href') === '#' + e.target.id); }); });
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  document.querySelectorAll('section[id]').forEach(function (s) { secObs.observe(s); });
+
+  // entrada dos blocos + contadores
+  function fmt(n, el) { return el.dataset.fmt === 'pt' ? n.toLocaleString('pt-BR') : String(n); }
+  function count(el) {
+    var to = +el.dataset.to, t0 = performance.now(), d = 1400;
+    (function f(t) { var k = Math.min(1, (t - t0) / d), e = 1 - Math.pow(1 - k, 3); el.textContent = fmt(Math.round(to * e), el); if (k < 1) requestAnimationFrame(f); })(t0);
+  }
+  var obs = new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      e.target.classList.add('in');
+      e.target.querySelectorAll('.cnt').forEach(count);
+      obs.unobserve(e.target);
+    });
+  }, { threshold: .15 });
+  document.querySelectorAll('.rv').forEach(function (el) { obs.observe(el); });
+
+  // nuvem: máquinas acendendo de 4 até 12 e voltando
+  var box = document.getElementById('machines'), mc = document.getElementById('mcount'), M = [];
+  for (var m = 0; m < 12; m++) { var d = document.createElement('div'); d.className = 'mch'; d.innerHTML = 'GPU ' + (m < 9 ? '0' : '') + (m + 1) + '<div class="bar"><i style="animation-delay:' + (m * .17).toFixed(2) + 's"></i></div>'; box.appendChild(d); M.push(d); }
+  var seq = [4, 6, 8, 10, 12, 12, 12, 9, 6, 4, 4], si = 0;
+  function setOn(n) { M.forEach(function (d, i) { d.classList.toggle('on', i < n); }); mc.textContent = n; }
+  setOn(4);
+  var rackObs = new IntersectionObserver(function (es) {
+    if (es[0].isIntersecting && !window.__rack) { window.__rack = setInterval(function () { si = (si + 1) % seq.length; setOn(seq[si]); }, 1100); }
+  }, { threshold: .3 });
+  rackObs.observe(document.getElementById('rack'));
+
+  // botão flutuante fica preto sobre a seção vermelha
+  new IntersectionObserver(function (es) { document.body.classList.toggle('on-red', es[0].isIntersecting); }, { rootMargin: '0px 0px -80px 0px', threshold: 0 })
+    .observe(document.getElementById('investimento'));
+
+  // o botão flutuante mostra o texto uma vez, depois de alguns segundos
+  var wa = document.querySelector('.wa');
+  setTimeout(function () { wa.classList.add('peek'); setTimeout(function () { wa.classList.remove('peek'); }, 3200); }, 4000);
+})();
+</script>
+</body>
+</html>
